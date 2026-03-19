@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI Agent Platform - Automate your workflow with intelligent agents. Early access available.">
+    <meta name="theme-color" content="#0A0E27">
+    <title>AI Agent Platform - Intelligent Automation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">AgentAI</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#signup" class="cta-link">Early Access</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1 class="headline">Meet Your AI Agent</h1>
+                <p class="subheadline">Automate complex workflows. Run 24/7. No coding required.</p>
+                <p class="description">Build, deploy, and manage autonomous AI agents that work like your best team member.</p>
+                
+                <div class="hero-buttons">
+                    <a href="#signup" class="btn btn-primary">Get Early Access</a>
+                    <a href="#features" class="btn btn-secondary">Learn More</a>
+                </div>
+
+                <p class="trust-text">🔒 100% secure. Your data never leaves your infrastructure.</p>
+            </div>
+
+            <div class="hero-visual">
+                <div class="agent-card">
+                    <div class="agent-header">
+                        <span class="agent-status">🟢 Active</span>
+                        <span class="agent-name">Agent v1.0</span>
+                    </div>
+                    <div class="agent-preview">
+                        <div class="terminal-line">$ agent deploy --workflow sales</div>
+                        <div class="terminal-line">✓ Initializing agent...</div>
+                        <div class="terminal-line">✓ Loading knowledge base...</div>
+                        <div class="terminal-line">✓ Ready to handle leads</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Why Choose AgentAI?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>Intelligent Automation</h3>
+                    <p>Create agents that understand context, make decisions, and improve over time.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚙️</div>
+                    <h3>Easy Integration</h3>
+                    <p>Connect to your existing tools via API. Slack, Discord, email, and more.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Real-time Analytics</h3>
+                    <p>Monitor agent performance, track automations, and optimize workflows instantly.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Enterprise Security</h3>
+                    <p>SOC 2 compliant. End-to-end encryption. Deploy on your own infrastructure.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Scale Infinitely</h3>
+                    <p>From 1 agent to 1000. No performance degradation. Pay as you grow.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💡</div>
+                    <h3>No-Code Builder</h3>
+                    <p>Build agents with our visual workflow designer. No programming knowledge required.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <h2>Simple, Transparent Pricing</h2>
+            <p class="pricing-subtitle">Choose the plan that fits your needs. Always cancel anytime.</p>
+            
+            <div class="pricing-grid">
+                <!-- Starter Plan -->
+                <div class="pricing-card">
+                    <h3 class="plan-name">Starter</h3>
+                    <div class="plan-price">
+                        <span class="currency">$</span>
+                        <span class="amount">29</span>
+                        <span class="period">/month</span>
+                    </div>
+                    <p class="plan-description">Perfect for getting started</p>
+                    <ul class="plan-features">
+                        <li>✓ Up to 5 agents</li>
+                        <li>✓ 10K tasks/month</li>
+                        <li>✓ Basic integrations</li>
+                        <li>✓ Email support</li>
+                        <li>✗ Advanced analytics</li>
+                        <li>✗ Custom integrations</li>
+                    </ul>
+                    <button class="btn btn-outline btn-block" onclick="scrollToSignup()">Get Started</button>
+                </div>
+
+                <!-- Professional Plan -->
+                <div class="pricing-card featured">
+                    <div class="badge">Most Popular</div>
+                    <h3 class="plan-name">Professional</h3>
+                    <div class="plan-price">
+                        <span class="currency">$</span>
+                        <span class="amount">99</span>
+                        <span class="period">/month</span>
+                    </div>
+                    <p class="plan-description">For growing teams</p>
+                    <ul class="plan-features">
+                        <li>✓ Up to 50 agents</li>
+                        <li>✓ 500K tasks/month</li>
+                        <li>✓ All integrations</li>
+                        <li>✓ Priority support</li>
+                        <li>✓ Advanced analytics</li>
+                        <li>✓ Custom workflows</li>
+                    </ul>
+                    <button class="btn btn-primary btn-block" onclick="scrollToSignup()">Get Early Access</button>
+                </div>
+
+                <!-- Enterprise Plan -->
+                <div class="pricing-card">
+                    <h3 class="plan-name">Enterprise</h3>
+                    <div class="plan-price">
+                        <span class="currency">Custom</span>
+                    </div>
+                    <p class="plan-description">For large organizations</p>
+                    <ul class="plan-features">
+                        <li>✓ Unlimited agents</li>
+                        <li>✓ Unlimited tasks</li>
+                        <li>✓ Custom deployment</li>
+                        <li>✓ Dedicated support</li>
+                        <li>✓ SLA guarantee</li>
+                        <li>✓ Advanced security</li>
+                    </ul>
+                    <button class="btn btn-outline btn-block" onclick="contactSales()">Contact Sales</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Early Access Section -->
+    <section id="signup" class="signup-section">
+        <div class="container">
+            <div class="signup-container">
+                <div class="signup-content">
+                    <h2>Be Among the First</h2>
+                    <p>Get early access to AgentAI and shape the future of intelligent automation.</p>
+                    <ul class="benefits-list">
+                        <li>🎁 Founding member discount (50% off first year)</li>
+                        <li>🤝 Direct access to our team</li>
+                        <li>🎯 Your feedback shapes our roadmap</li>
+                        <li>🚀 Priority onboarding</li>
+                    </ul>
+                </div>
+
+                <form class="signup-form" id="earlyAccessForm">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input 
+                            type="text" 
+                            id="name" 
+                            name="name" 
+                            placeholder="John Doe" 
+                            required
+                            pattern="[A-Za-z\s]+"
+                            title="Name should only contain letters and spaces"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            placeholder="you@company.com" 
+                            required
+                            pattern="[^@]+@[^@]+\.[^@]+"
+                            title="Please enter a valid email address"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="company">Company</label>
+                        <input 
+                            type="text" 
+                            id="company" 
+                            name="company" 
+                            placeholder="Your company name" 
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="usecase">What will you use AgentAI for?</label>
+                        <select id="usecase" name="usecase" required>
+                            <option value="">Select an option...</option>
+                            <option value="sales">Sales automation</option>
+                            <option value="support">Customer support</option>
+                            <option value="marketing">Marketing automation</option>
+                            <option value="operations">Operations</option>
+                            <option value="research">Research & data</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group checkbox">
+                        <input 
+                            type="checkbox" 
+                            id="terms" 
+                            name="terms" 
+                            required
+                        >
+                        <label for="terms">I agree to receive updates about AgentAI</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Claim Early Access</button>
+                    <p class="form-privacy">We'll never spam you. Unsubscribe anytime.</p>
+                </form>
+            </div>
+
+            <div id="successMessage" class="success-message" style="display: none;">
+                <h3>🎉 Welcome to the waitlist!</h3>
+                <p>Check your inbox for a confirmation email. We'll be in touch soon with your early access details.</p>
+                <p class="success-email" id="successEmail"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>AgentAI</h4>
+                <p>Intelligent automation for the modern team.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Links</h4>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Security</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Follow</h4>
+                <ul>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                    <li><a href="#">GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 AgentAI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
