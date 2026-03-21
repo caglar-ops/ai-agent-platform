@@ -3,666 +3,223 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="AI Agent Platform - Harness the power of autonomous AI agents for your business. Join our early access program today.">
-    <meta name="keywords" content="AI agents, automation, intelligent systems, early access">
-    <meta name="author" content="AI Agent Platform">
-    <meta property="og:title" content="AI Agent Platform">
-    <meta property="og:description" content="Harness the power of autonomous AI agents for your business">
-    <meta property="og:type" content="website">
-    <title>AI Agent Platform | Autonomous AI at Your Service</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #fff;
-        }
-
-        /* Navigation */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 2rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            transition: opacity 0.3s;
-        }
-
-        nav a:hover {
-            opacity: 0.8;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 6rem 2rem;
-            text-align: center;
-            min-height: 600px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            animation: fadeInDown 0.8s ease;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.95;
-            animation: fadeInUp 0.8s ease 0.2s both;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: #ff6b6b;
-            color: white;
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 600;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: none;
-            cursor: pointer;
-            animation: fadeInUp 0.8s ease 0.4s both;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
-        }
-
-        /* Early Access Section */
-        .early-access {
-            padding: 4rem 2rem;
-            background: #f8f9fa;
-            text-align: center;
-        }
-
-        .early-access h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #333;
-        }
-
-        .early-access-form {
-            max-width: 500px;
-            margin: 2rem auto;
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        .form-group {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .form-group input {
-            flex: 1;
-            padding: 1rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 5px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        .form-group button {
-            padding: 1rem 2rem;
-            background: #667eea;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .form-group button:hover {
-            background: #5568d3;
-        }
-
-        .form-group button:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-
-        .success-message {
-            display: none;
-            color: #27ae60;
-            font-weight: 600;
-            margin-top: 1rem;
-            padding: 1rem;
-            background: #d5f4e6;
-            border-radius: 5px;
-            animation: slideIn 0.3s ease;
-        }
-
-        .error-message {
-            display: none;
-            color: #e74c3c;
-            font-weight: 600;
-            margin-top: 1rem;
-            padding: 1rem;
-            background: #fadbd8;
-            border-radius: 5px;
-        }
-
-        /* Pricing Section */
-        .pricing {
-            padding: 4rem 2rem;
-            background: white;
-            text-align: center;
-        }
-
-        .pricing h2 {
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #333;
-        }
-
-        .pricing-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .pricing-card {
-            background: white;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            padding: 2rem;
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            border-color: #667eea;
-        }
-
-        .pricing-card.popular {
-            border-color: #667eea;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
-            transform: scale(1.05);
-        }
-
-        .pricing-card.popular .badge {
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #667eea;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .pricing-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: #333;
-        }
-
-        .price {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #667eea;
-            margin: 1rem 0;
-        }
-
-        .price-subtitle {
-            color: #999;
-            font-size: 0.9rem;
-            margin-bottom: 2rem;
-        }
-
-        .features {
-            text-align: left;
-            margin: 2rem 0;
-            border-top: 1px solid #e0e0e0;
-            border-bottom: 1px solid #e0e0e0;
-            padding: 2rem 0;
-        }
-
-        .features li {
-            list-style: none;
-            margin-bottom: 0.8rem;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .features li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #27ae60;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .pricing-cta {
-            display: inline-block;
-            background: #667eea;
-            color: white;
-            padding: 0.8rem 2rem;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s;
-            margin-top: 1.5rem;
-            width: 100%;
-            text-align: center;
-        }
-
-        .pricing-cta:hover {
-            background: #5568d3;
-        }
-
-        .pricing-card.popular .pricing-cta {
-            background: #ff6b6b;
-        }
-
-        .pricing-card.popular .pricing-cta:hover {
-            background: #ff5252;
-        }
-
-        /* Footer */
-        footer {
-            background: #2c3e50;
-            color: white;
-            padding: 3rem 2rem;
-            text-align: center;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .footer-section h4 {
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section a {
-            color: #ecf0f1;
-            text-decoration: none;
-            transition: color 0.3s;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-section a:hover {
-            color: #667eea;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #667eea;
-            color: white;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.3s;
-        }
-
-        .social-links a:hover {
-            background: #ff6b6b;
-        }
-
-        .footer-bottom {
-            border-top: 1px solid #34495e;
-            padding-top: 2rem;
-            font-size: 0.9rem;
-            color: #95a5a6;
-        }
-
-        /* Animations */
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            nav ul {
-                gap: 1rem;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero p {
-                font-size: 1.1rem;
-            }
-
-            .pricing-card.popular {
-                transform: scale(1);
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <title>AI Agent Platform - Build Autonomous Agents</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Navigation -->
-    <nav>
-        <div class="logo">🤖 AI Agent Platform</div>
-        <ul>
-            <li><a href="#pricing">Pricing</a></li>
-            <li><a href="#early-access">Join</a></li>
-            <li><a href="#footer">Contact</a></li>
-        </ul>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">🤖 AI Agent Platform</div>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#signup">Early Access</a></li>
+            </ul>
+        </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero">
-        <h1>Autonomous AI Agents at Scale</h1>
-        <p>Deploy intelligent agents that work 24/7. Automate complex workflows. Reduce costs. Transform your business.</p>
-        <button class="cta-button" onclick="document.getElementById('email-input').focus()">Get Early Access</button>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Build Autonomous AI Agents in Minutes</h1>
+                <p class="hero-subtitle">Deploy intelligent agents that work 24/7, learn from your workflows, and automate your entire operation</p>
+                <a href="#signup" class="cta-button">Get Early Access</a>
+                <p class="hero-meta">Join 500+ teams already building the future</p>
+            </div>
+            <div class="hero-visual">
+                <div class="gradient-box"></div>
+            </div>
+        </div>
     </section>
 
-    <!-- Early Access Section -->
-    <section class="early-access" id="early-access">
-        <h2>Join Our Early Access Program</h2>
-        <p>Be among the first to experience the future of AI automation</p>
-        <form class="early-access-form" id="waitlist-form">
-            <div class="form-group">
-                <input 
-                    type="email" 
-                    id="email-input" 
-                    placeholder="Enter your email" 
-                    required
-                    aria-label="Email address"
-                >
-                <button type="submit">Join</button>
+    <!-- Early Access Signup -->
+    <section id="signup" class="signup-section">
+        <div class="container">
+            <h2>Join the Waitlist</h2>
+            <p class="section-subtitle">Be among the first to access the AI Agent Platform</p>
+            
+            <form class="signup-form" id="signupForm">
+                <div class="form-group">
+                    <input type="text" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Work Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Company (optional)">
+                </div>
+                <div class="form-group">
+                    <select required>
+                        <option value="">Select your role</option>
+                        <option value="engineer">Engineer</option>
+                        <option value="product">Product Manager</option>
+                        <option value="ops">Operations</option>
+                        <option value="founder">Founder/CEO</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-button">Unlock Early Access</button>
+                <p class="form-note">✓ No credit card required. We'll email you next steps.</p>
+            </form>
+        </div>
+    </section>
+
+    <!-- Features Overview -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Powerful Features</h2>
+            <p class="section-subtitle">Everything you need to build and deploy AI agents</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Lightning Fast Deployment</h3>
+                    <p>Deploy custom agents in minutes, not months. Our platform handles infrastructure so you focus on logic.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Advanced LLM Integration</h3>
+                    <p>Seamless integration with GPT-4, Claude, and custom models. Switch between providers with one click.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3>No-Code Agent Builder</h3>
+                    <p>Visual workflow designer for non-technical teams. Code when you need it, skip it when you don't.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Real-Time Analytics</h3>
+                    <p>Monitor agent performance, success rates, and cost. Get insights that drive optimization.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>Enterprise Security</h3>
+                    <p>SOC 2 compliance, encrypted end-to-end, role-based access control. Your data stays yours.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>API-First Architecture</h3>
+                    <p>Integrate with your entire stack. Connect to 500+ apps, custom APIs, and internal systems.</p>
+                </div>
             </div>
-            <div class="success-message" id="success-message">
-                ✓ Thank you! Check your email for updates.
-            </div>
-            <div class="error-message" id="error-message"></div>
-        </form>
+        </div>
     </section>
 
     <!-- Pricing Section -->
-    <section class="pricing" id="pricing">
-        <h2>Simple, Transparent Pricing</h2>
-        <div class="pricing-container">
-            <!-- Starter Plan -->
-            <div class="pricing-card">
-                <h3>Starter</h3>
-                <div class="price">$99<span style="font-size: 0.6em; color: #999;">/mo</span></div>
-                <p class="price-subtitle">Perfect for small teams</p>
-                <ul class="features">
-                    <li>Up to 3 AI agents</li>
-                    <li>1,000 monthly operations</li>
-                    <li>Basic analytics</li>
-                    <li>Email support</li>
-                    <li>API access</li>
-                </ul>
-                <button class="pricing-cta">Choose Plan</button>
-            </div>
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <h2>Simple, Transparent Pricing</h2>
+            <p class="section-subtitle">Scale as you grow</p>
+            
+            <div class="pricing-grid">
+                <!-- Starter -->
+                <div class="pricing-card">
+                    <h3>Starter</h3>
+                    <div class="price">
+                        <span class="amount">$99</span>
+                        <span class="period">/month</span>
+                    </div>
+                    <p class="price-description">Perfect for trying it out</p>
+                    <ul class="features-list">
+                        <li>✓ Up to 5 agents</li>
+                        <li>✓ 100K API calls/month</li>
+                        <li>✓ Basic analytics</li>
+                        <li>✓ Community support</li>
+                        <li>✗ Custom integrations</li>
+                        <li>✗ SLA guarantee</li>
+                    </ul>
+                    <button class="pricing-button">Get Started</button>
+                </div>
 
-            <!-- Pro Plan -->
-            <div class="pricing-card popular">
-                <div class="badge">MOST POPULAR</div>
-                <h3>Pro</h3>
-                <div class="price">$499<span style="font-size: 0.6em; color: #999;">/mo</span></div>
-                <p class="price-subtitle">For growing businesses</p>
-                <ul class="features">
-                    <li>Up to 20 AI agents</li>
-                    <li>50,000 monthly operations</li>
-                    <li>Advanced analytics</li>
-                    <li>Priority support</li>
-                    <li>Custom integrations</li>
-                    <li>Team collaboration</li>
-                </ul>
-                <button class="pricing-cta">Choose Plan</button>
-            </div>
+                <!-- Professional -->
+                <div class="pricing-card featured">
+                    <div class="badge">MOST POPULAR</div>
+                    <h3>Professional</h3>
+                    <div class="price">
+                        <span class="amount">$499</span>
+                        <span class="period">/month</span>
+                    </div>
+                    <p class="price-description">For growing teams</p>
+                    <ul class="features-list">
+                        <li>✓ Unlimited agents</li>
+                        <li>✓ 5M API calls/month</li>
+                        <li>✓ Advanced analytics</li>
+                        <li>✓ Priority email support</li>
+                        <li>✓ Custom integrations</li>
+                        <li>✗ 24/7 phone support</li>
+                    </ul>
+                    <button class="pricing-button primary">Get Started</button>
+                </div>
 
-            <!-- Enterprise Plan -->
-            <div class="pricing-card">
-                <h3>Enterprise</h3>
-                <div class="price">Custom<span style="font-size: 0.6em; color: #999;"></span></div>
-                <p class="price-subtitle">For large organizations</p>
-                <ul class="features">
-                    <li>Unlimited AI agents</li>
-                    <li>Unlimited operations</li>
-                    <li>Custom analytics</li>
-                    <li>24/7 dedicated support</li>
-                    <li>Advanced security</li>
-                    <li>SLA guarantees</li>
-                </ul>
-                <button class="pricing-cta">Contact Sales</button>
+                <!-- Enterprise -->
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <div class="price">
+                        <span class="amount">Custom</span>
+                        <span class="period">contact us</span>
+                    </div>
+                    <p class="price-description">For large deployments</p>
+                    <ul class="features-list">
+                        <li>✓ Unlimited everything</li>
+                        <li>✓ Dedicated infrastructure</li>
+                        <li>✓ White-label options</li>
+                        <li>✓ 24/7 phone & email support</li>
+                        <li>✓ Custom SLA</li>
+                        <li>✓ On-premise deployment</li>
+                    </ul>
+                    <button class="pricing-button">Contact Sales</button>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer id="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Product</h4>
-                <ul>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#pricing">Pricing</a></li>
-                    <li><a href="#docs">Documentation</a></li>
-                    <li><a href="#roadmap">Roadmap</a></li>
-                </ul>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Security</a></li>
+                        <li><a href="#">Roadmap</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <ul>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">GitHub</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="footer-section">
-                <h4>Company</h4>
-                <ul>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#blog">Blog</a></li>
-                    <li><a href="#careers">Careers</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
+            <div class="footer-bottom">
+                <p>&copy; 2026 AI Agent Platform. All rights reserved.</p>
             </div>
-            <div class="footer-section">
-                <h4>Legal</h4>
-                <ul>
-                    <li><a href="#privacy">Privacy Policy</a></li>
-                    <li><a href="#terms">Terms of Service</a></li>
-                    <li><a href="#cookies">Cookie Policy</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="social-links">
-            <a href="#twitter" title="Twitter">𝕏</a>
-            <a href="#linkedin" title="LinkedIn">in</a>
-            <a href="#github" title="GitHub">⚙</a>
-            <a href="#discord" title="Discord">⚡</a>
-        </div>
-
-        <div class="footer-bottom">
-            <p>&copy; 2026 AI Agent Platform. All rights reserved.</p>
         </div>
     </footer>
 
-    <script>
-        const form = document.getElementById('waitlist-form');
-        const emailInput = document.getElementById('email-input');
-        const successMessage = document.getElementById('success-message');
-        const errorMessage = document.getElementById('error-message');
-
-        // Validate email format
-        function isValidEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(email);
-        }
-
-        // Handle form submission
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const email = emailInput.value.trim();
-
-            // Clear messages
-            successMessage.style.display = 'none';
-            errorMessage.style.display = 'none';
-            errorMessage.textContent = '';
-
-            // Validate email
-            if (!email) {
-                errorMessage.textContent = 'Please enter an email address.';
-                errorMessage.style.display = 'block';
-                return;
-            }
-
-            if (!isValidEmail(email)) {
-                errorMessage.textContent = 'Please enter a valid email address.';
-                errorMessage.style.display = 'block';
-                return;
-            }
-
-            // Submit to server
-            try {
-                const response = await fetch('/api/waitlist', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ email })
-                });
-
-                const data = await response.json();
-
-                if (response.ok) {
-                    successMessage.style.display = 'block';
-                    emailInput.value = '';
-                } else {
-                    errorMessage.textContent = data.message || 'An error occurred. Please try again.';
-                    errorMessage.style.display = 'block';
-                }
-            } catch (error) {
-                // Fallback: save to local storage and show success
-                const waitlist = JSON.parse(localStorage.getItem('waitlist') || '[]');
-                if (!waitlist.includes(email)) {
-                    waitlist.push(email);
-                    localStorage.setItem('waitlist', JSON.stringify(waitlist));
-                }
-                
-                successMessage.style.display = 'block';
-                emailInput.value = '';
-            }
-        });
-
-        // Add smooth scroll for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href !== '#twitter' && href !== '#linkedin' && href !== '#github' && href !== '#discord' &&
-                    href !== '#features' && href !== '#docs' && href !== '#roadmap' && href !== '#about' &&
-                    href !== '#blog' && href !== '#careers' && href !== '#contact' && href !== '#privacy' &&
-                    href !== '#terms' && href !== '#cookies') {
-                    e.preventDefault();
-                    const target = document.querySelector(href);
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth' });
-                    }
-                }
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>

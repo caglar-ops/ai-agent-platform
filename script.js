@@ -1,180 +1,8 @@
-// Form Handling and Validation
-const earlyAccessForm = document.getElementById('earlyAccessForm');
-const successMessage = document.getElementById('successMessage');
-
-// Scroll to signup function
-function scrollToSignup() {
-    const signupSection = document.getElementById('signup');
-    signupSection.scrollIntoView({ behavior: 'smooth' });
-}
-
-// Contact sales function
-function contactSales() {
-    window.location.href = 'mailto:sales@agentai.com?subject=Enterprise Inquiry';
-}
-
-// Form submission handler
-earlyAccessForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    // Collect form data
-    const formData = new FormData(earlyAccessForm);
-    const data = {
-        name: formData.get('name'),
-        email: formData.get('email'),
-        company: formData.get('company'),
-        usecase: formData.get('usecase'),
-        timestamp: new Date().toISOString()
-    };
-
-    // Validate form data on client side
-    if (!validateFormData(data)) {
-        showError('Please fill in all required fields correctly.');
-        return;
-    }
-
-    try {
-        // Show loading state
-        const submitButton = earlyAccessForm.querySelector('button[type="submit"]');
-        const originalText = submitButton.textContent;
-        submitButton.textContent = 'Processing...';
-        submitButton.disabled = true;
-
-        // Submit to backend
-        const response = await fetch('/api/waitlist', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        });
-
-        if (!response.ok) {
-            throw new Error(`Server error: ${response.statusText}`);
-        }
-
-        const result = await response.json();
-
-        if (result.success) {
-            // Show success message
-            displaySuccessMessage(data.email);
-            // Reset form
-            earlyAccessForm.reset();
-            // Re-enable button
-            submitButton.textContent = originalText;
-            submitButton.disabled = false;
-        } else {
-            throw new Error(result.message || 'Submission failed');
-        }
-    } catch (error) {
-        console.error('Form submission error:', error);
-        showError(error.message || 'Failed to submit form. Please try again.');
-        // Re-enable button
-        const submitButton = earlyAccessForm.querySelector('button[type="submit"]');
-        submitButton.disabled = false;
-        submitButton.textContent = originalText;
-    }
-});
-
-// Form validation function
-function validateFormData(data) {
-    // Check required fields
-    if (!data.name || !data.email || !data.usecase) {
-        return false;
-    }
-
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(data.email)) {
-        return false;
-    }
-
-    // Validate name (letters and spaces only)
-    const nameRegex = /^[A-Za-z\s]+$/;
-    if (!nameRegex.test(data.name)) {
-        return false;
-    }
-
-    return true;
-}
-
-// Display success message
-function displaySuccessMessage(email) {
-    earlyAccessForm.style.display = 'none';
-    successMessage.style.display = 'block';
-    document.getElementById('successEmail').textContent = `Confirmation sent to ${email}`;
-
-    // Scroll to success message
-    successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-}
-
-// Show error message
-function showError(message) {
-    // Create error alert
-    const errorDiv = document.createElement('div');
-    errorDiv.className = 'error-alert';
-    errorDiv.textContent = message;
-    errorDiv.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: #EF4444;
-        color: white;
-        padding: 1rem 1.5rem;
-        border-radius: 8px;
-        z-index: 1000;
-        max-width: 400px;
-        animation: slideIn 0.3s ease;
-    `;
-
-    document.body.appendChild(errorDiv);
-
-    // Remove after 5 seconds
-    setTimeout(() => {
-        errorDiv.style.animation = 'slideOut 0.3s ease';
-        setTimeout(() => errorDiv.remove(), 300);
-    }, 5000);
-}
-
-// Add CSS animations
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideIn {
-        from {
-            transform: translateX(400px);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
-    }
-
-    @keyframes slideOut {
-        from {
-            transform: translateX(0);
-            opacity: 1;
-        }
-        to {
-            transform: translateX(400px);
-            opacity: 0;
-        }
-    }
-
-    .error-alert {
-        box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
-    }
-`;
-document.head.appendChild(style);
-
-// Smooth scroll for navigation links
+// Smooth scroll behavior
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        if (href === '#') return;
-        
         e.preventDefault();
-        const target = document.querySelector(href);
+        const target = document.querySelector(this.getAttribute('href'));
         if (target) {
             target.scrollIntoView({
                 behavior: 'smooth',
@@ -184,63 +12,106 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Analytics tracking (optional - can be connected to analytics service)
-function trackEvent(eventName, eventData) {
-    // Placeholder for analytics integration
-    console.log(`Event: ${eventName}`, eventData);
-    
-    // Can be connected to Google Analytics, Mixpanel, etc.
-    if (window.gtag) {
-        gtag('event', eventName, eventData);
-    }
+// Signup form handler
+const signupForm = document.getElementById('signupForm');
+if (signupForm) {
+    signupForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form values
+        const formData = new FormData(this);
+        const data = Object.fromEntries(formData);
+        
+        // Here you would typically send this to a backend
+        console.log('Signup data:', data);
+        
+        // Show success message
+        const submitButton = this.querySelector('.submit-button');
+        const originalText = submitButton.textContent;
+        submitButton.textContent = '✓ Thanks! Check your email';
+        submitButton.style.background = '#10b981';
+        
+        // Reset form
+        this.reset();
+        
+        // Revert button after 3 seconds
+        setTimeout(() => {
+            submitButton.textContent = originalText;
+            submitButton.style.background = '';
+        }, 3000);
+    });
 }
 
-// Track form views
-trackEvent('form_view', {
-    section: 'early_access'
-});
-
-// Track feature section views (intersection observer)
+// Scroll animations
 const observerOptions = {
-    threshold: 0.5
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
 };
 
-const observer = new IntersectionObserver((entries) => {
+const observer = new IntersectionObserver(function(entries) {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            const sectionId = entry.target.id;
-            trackEvent('section_view', {
-                section: sectionId
-            });
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
         }
     });
 }, observerOptions);
 
-// Observe sections
-document.querySelectorAll('section[id]').forEach(section => {
-    observer.observe(section);
+// Observe feature cards
+document.querySelectorAll('.feature-card').forEach(card => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(20px)';
+    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(card);
 });
 
-// Mobile menu handling (for future expansion)
-function toggleMobileMenu() {
-    const navLinks = document.querySelector('.nav-links');
-    navLinks.classList.toggle('active');
-}
+// Observe pricing cards
+document.querySelectorAll('.pricing-card').forEach(card => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(20px)';
+    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(card);
+});
 
-// Lazy load images (for future optimization)
-if ('IntersectionObserver' in window) {
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.classList.add('loaded');
-                observer.unobserve(img);
-            }
-        });
+// Add active state to nav links on scroll
+window.addEventListener('scroll', () => {
+    let current = '';
+    const sections = document.querySelectorAll('section');
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (pageYOffset >= sectionTop - 200) {
+            current = section.getAttribute('id');
+        }
     });
+    
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').slice(1) === current) {
+            link.classList.add('active');
+        }
+    });
+});
 
-    document.querySelectorAll('img[data-src]').forEach(img => imageObserver.observe(img));
+// Mobile menu toggle (if needed in future)
+function initMobileMenu() {
+    // This can be expanded later for mobile navigation
+    const navbar = document.querySelector('.navbar');
+    if (window.innerWidth < 768) {
+        // Mobile specific code
+    }
 }
 
-console.log('AgentAI landing page loaded successfully');
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', () => {
+    initMobileMenu();
+});
+
+// Keyboard accessibility for buttons
+document.querySelectorAll('button').forEach(button => {
+    button.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            button.click();
+        }
+    });
+});
