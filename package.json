@@ -1,7 +1,7 @@
 {
-  "name": "ai-agent-platform-landing",
+  "name": "ai-agent-platform",
   "version": "1.0.0",
-  "description": "Production-ready landing page for AI Agent Platform with early access form",
+  "description": "AI Agent Platform - Convert Smarter, Faster",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -10,9 +10,9 @@
   "keywords": [
     "ai",
     "agents",
-    "landing-page",
-    "early-access"
+    "automation",
+    "platform"
   ],
-  "author": "AI Agent Platform",
+  "author": "AI Agent Platform Team",
   "license": "MIT"
 }
