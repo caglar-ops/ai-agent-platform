@@ -1,117 +1,194 @@
-// Smooth scroll behavior
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
+/**
+ * AI Agent Platform Landing Page
+ * Form validation, email collection, and interactive features
+ */
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    setupEmailForm();
+    setupSmoothScroll();
+    setupFormSubmitHandler();
 });
 
-// Signup form handler
-const signupForm = document.getElementById('signupForm');
-if (signupForm) {
-    signupForm.addEventListener('submit', function(e) {
+/**
+ * Email validation utility
+ */
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+/**
+ * Setup email form submission
+ */
+function setupEmailForm() {
+    const form = document.getElementById('emailForm');
+    const emailInput = document.getElementById('email');
+    const formMessage = document.getElementById('formMessage');
+
+    if (!form) return;
+
+    // Real-time email validation feedback (optional visual cue)
+    emailInput.addEventListener('blur', function() {
+        const email = this.value.trim();
+        if (email && !isValidEmail(email)) {
+            this.style.borderColor = '#ef4444';
+        } else {
+            this.style.borderColor = '';
+        }
+    });
+
+    // Handle form submission
+    form.addEventListener('submit', async function(e) {
         e.preventDefault();
         
-        // Get form values
-        const formData = new FormData(this);
-        const data = Object.fromEntries(formData);
-        
-        // Here you would typically send this to a backend
-        console.log('Signup data:', data);
-        
-        // Show success message
-        const submitButton = this.querySelector('.submit-button');
+        const email = emailInput.value.trim();
+        const submitButton = form.querySelector('.form-button');
+
+        // Validate email
+        if (!email) {
+            showFormMessage('Please enter your email address', 'error');
+            return;
+        }
+
+        if (!isValidEmail(email)) {
+            showFormMessage('Please enter a valid email address', 'error');
+            return;
+        }
+
+        // Disable button and show loading state
+        submitButton.disabled = true;
         const originalText = submitButton.textContent;
-        submitButton.textContent = '✓ Thanks! Check your email';
-        submitButton.style.background = '#10b981';
-        
-        // Reset form
-        this.reset();
-        
-        // Revert button after 3 seconds
-        setTimeout(() => {
+        submitButton.textContent = 'Signing up...';
+
+        try {
+            // Simulate API call (replace with actual endpoint)
+            await submitWaitlist(email);
+            
+            // Success
+            showFormMessage('✅ Welcome! Check your email for confirmation.', 'success');
+            emailInput.value = '';
+            
+            // Track conversion
+            trackConversion(email);
+            
+            // Reset form after 2 seconds
+            setTimeout(() => {
+                formMessage.style.display = 'none';
+                submitButton.disabled = false;
+                submitButton.textContent = originalText;
+            }, 2000);
+
+        } catch (error) {
+            showFormMessage('Something went wrong. Please try again.', 'error');
+            submitButton.disabled = false;
             submitButton.textContent = originalText;
-            submitButton.style.background = '';
-        }, 3000);
+        }
     });
 }
 
-// Scroll animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
+/**
+ * Submit email to waitlist (API integration point)
+ */
+async function submitWaitlist(email) {
+    // In production, replace this with your actual API endpoint
+    // Example:
+    // const response = await fetch('https://api.example.com/waitlist', {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify({ email })
+    // });
+    // 
+    // if (!response.ok) {
+    //     throw new Error('Failed to submit email');
+    // }
+    // 
+    // return response.json();
+
+    // For now, simulate a successful submission
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            // Store in localStorage for demo purposes
+            const waitlist = JSON.parse(localStorage.getItem('waitlist') || '[]');
+            if (!waitlist.includes(email)) {
+                waitlist.push(email);
+                localStorage.setItem('waitlist', JSON.stringify(waitlist));
+            }
+            resolve({ success: true, email });
+        }, 800);
+    });
+}
+
+/**
+ * Display form message
+ */
+function showFormMessage(message, type) {
+    const formMessage = document.getElementById('formMessage');
+    formMessage.textContent = message;
+    formMessage.className = `form-message ${type}`;
+    formMessage.style.display = 'block';
+}
+
+/**
+ * Track conversion (analytics integration point)
+ */
+function trackConversion(email) {
+    // Send event to analytics service
+    // Example with Google Analytics:
+    // if (window.gtag) {
+    //     gtag('event', 'early_access_signup', {
+    //         'email': email,
+    //         'timestamp': new Date().toISOString()
+    //     });
+    // }
+
+    // Log to console for development
+    console.log('📊 Conversion tracked:', {
+        event: 'early_access_signup',
+        email: email,
+        timestamp: new Date().toISOString()
+    });
+}
+
+/**
+ * Setup smooth scroll behavior for navigation links
+ */
+function setupSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href === '#') return;
+
+            const target = document.querySelector(href);
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+}
+
+/**
+ * Utility: Get waitlist for admin purposes (localStorage demo)
+ */
+function getWaitlist() {
+    return JSON.parse(localStorage.getItem('waitlist') || '[]');
+}
+
+/**
+ * Utility: Clear waitlist (for testing)
+ */
+function clearWaitlist() {
+    localStorage.removeItem('waitlist');
+    console.log('✓ Waitlist cleared');
+}
+
+// Expose utilities to window for console access during development
+window.waitlistDebug = {
+    getWaitlist,
+    clearWaitlist,
+    trackConversion
 };
-
-const observer = new IntersectionObserver(function(entries) {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-}, observerOptions);
-
-// Observe feature cards
-document.querySelectorAll('.feature-card').forEach(card => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(20px)';
-    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(card);
-});
-
-// Observe pricing cards
-document.querySelectorAll('.pricing-card').forEach(card => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(20px)';
-    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(card);
-});
-
-// Add active state to nav links on scroll
-window.addEventListener('scroll', () => {
-    let current = '';
-    const sections = document.querySelectorAll('section');
-    
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        if (pageYOffset >= sectionTop - 200) {
-            current = section.getAttribute('id');
-        }
-    });
-    
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href').slice(1) === current) {
-            link.classList.add('active');
-        }
-    });
-});
-
-// Mobile menu toggle (if needed in future)
-function initMobileMenu() {
-    // This can be expanded later for mobile navigation
-    const navbar = document.querySelector('.navbar');
-    if (window.innerWidth < 768) {
-        // Mobile specific code
-    }
-}
-
-// Initialize on page load
-document.addEventListener('DOMContentLoaded', () => {
-    initMobileMenu();
-});
-
-// Keyboard accessibility for buttons
-document.querySelectorAll('button').forEach(button => {
-    button.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-            button.click();
-        }
-    });
-});
