@@ -1,197 +1,227 @@
-# AI Agent Platform - Landing Page
+# AI Agent Platform Landing Page
 
-A modern, conversion-focused landing page for the AI Agent Platform with early access signup and email waitlist collection.
+A modern, conversion-focused landing page for the AI Agent Platform with early access signup.
 
 ## Features
 
-✨ **What's Included:**
-
-- **Hero Section** - Compelling headline, subtitle, and CTA button
-- **Features Showcase** - 6 core features with icons (Smart Automation, Speed, Security, Analytics, Integration, Scalability)
-- **Pricing Tiers** - Three professional pricing plans (Starter, Professional, Enterprise) with feature comparison
-- **Early Access Form** - Email collection with validation and real-time feedback
-- **Responsive Design** - Mobile-first, works perfectly on all devices
-- **Modern Aesthetics** - Gradient backgrounds, smooth animations, professional typography
-- **Email Validation** - Client-side validation with user-friendly error messages
-- **Accessibility** - ARIA labels, semantic HTML, keyboard navigation
+✨ **Hero Section** - Clear value proposition with email waitlist form
+💰 **Pricing Tiers** - 3 pricing tiers (Starter, Professional, Enterprise)
+❓ **FAQ Section** - Comprehensive answers to common questions
+🗣️ **Testimonials** - Social proof with customer quotes
+🌓 **Dark Mode** - Full dark mode support
+📱 **Responsive Design** - Mobile-first, optimized for all devices
+✅ **Form Validation** - Email validation and duplicate prevention
+💾 **Email Storage** - Simple JSON-based email storage
 
 ## Project Structure
 
 ```
 ai-agent-platform/
-├── index.html          # Main landing page markup
-├── styles.css          # Complete styling with responsive breakpoints
-├── script.js           # Form validation and interactivity
-├── README.md           # This file
-└── .git/               # Version control
+├── pages/
+│   ├── _app.jsx           # App wrapper with dark mode support
+│   ├── _document.jsx      # Document structure
+│   ├── index.jsx          # Home page
+│   └── api/
+│       └── subscribe.js   # Email subscription API endpoint
+├── components/
+│   ├── Header.jsx         # Navigation header with dark mode toggle
+│   ├── Hero.jsx           # Hero section with email form
+│   ├── Pricing.jsx        # Pricing tiers section
+│   ├── FAQ.jsx            # FAQ accordion section
+│   ├── Testimonials.jsx   # Customer testimonials section
+│   └── Footer.jsx         # Footer with links
+├── styles/
+│   └── globals.css        # Global Tailwind styles
+├── public/                # Static assets
+├── emails.json            # Email storage file
+├── package.json           # Dependencies
+├── next.config.js         # Next.js config
+├── tailwind.config.js     # Tailwind CSS config
+└── README.md              # This file
 ```
+
+## Tech Stack
+
+- **Framework**: Next.js 14
+- **Styling**: Tailwind CSS
+- **Validation**: Custom email validation
+- **Storage**: JSON file (emails.json)
+- **Dark Mode**: CSS class-based
 
 ## Getting Started
 
-### Local Development
+### Prerequisites
 
-1. **Clone or navigate to the project:**
-   ```bash
-   cd /home/clawd/.openclaw/workspace/projects/ai-agent-platform
-   ```
+- Node.js 16+ and npm/yarn
 
-2. **Start a local server** (Python 3):
-   ```bash
-   python3 -m http.server 8000
-   ```
+### Installation
 
-3. **Open in browser:**
-   ```
-   http://localhost:8000
-   ```
+```bash
+npm install
+```
 
-### Form Integration
+### Development
 
-The early access form is currently set up with localStorage for demo purposes. To integrate with a real backend:
+```bash
+npm run dev
+```
 
-1. Update the `submitWaitlist()` function in `script.js`
-2. Point to your API endpoint (e.g., Firebase, Supabase, custom backend)
-3. Add authentication headers if needed
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-**Example integration with a REST API:**
+### Production Build
 
-```javascript
-async function submitWaitlist(email) {
-    const response = await fetch('https://your-api.com/waitlist', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email })
-    });
+```bash
+npm run build
+npm start
+```
 
-    if (!response.ok) {
-        throw new Error('Failed to submit email');
-    }
+## Features Breakdown
 
-    return response.json();
+### Hero Section
+- Animated gradient heading
+- Email subscription form with validation
+- Social proof counter
+- Smooth scroll indicators
+
+### Pricing
+- 3 tier options (Starter, Professional, Enterprise)
+- Feature comparison
+- Call-to-action buttons
+- Highlighted "Most Popular" tier
+
+### FAQ
+- 6 pre-written FAQs
+- Expandable accordion interface
+- Contact CTA
+
+### Testimonials
+- 3 customer testimonial cards
+- Star ratings
+- Company trust indicators
+- Responsive grid layout
+
+### Dark Mode
+- Persistent storage using localStorage
+- Toggle button in header
+- Smooth transitions
+- Optimized colors for both modes
+
+## API Endpoints
+
+### `POST /api/subscribe`
+
+Subscribe email to waitlist.
+
+**Request:**
+```json
+{
+  "email": "user@example.com"
 }
 ```
 
-## Analytics Setup
+**Response (Success):**
+```json
+{
+  "success": true,
+  "message": "Successfully subscribed!"
+}
+```
 
-To track early access signups with Google Analytics:
+**Response (Error):**
+```json
+{
+  "error": "Invalid email address"
+}
+```
 
-1. Add your GA4 tracking code to `index.html`:
-   ```html
-   <script async src="https://www.googletagmanager.com/gtag/js?id=G-YOUR-ID"></script>
-   <script>
-     window.dataLayer = window.dataLayer || [];
-     function gtag(){dataLayer.push(arguments);}
-     gtag('js', new Date());
-     gtag('config', 'G-YOUR-ID');
-   </script>
-   ```
+**Status Codes:**
+- `200` - Successfully subscribed
+- `400` - Invalid email or already subscribed
+- `500` - Server error
 
-2. Uncomment the analytics section in `script.js` (trackConversion function)
+## Email Storage
+
+Emails are stored in `emails.json` as a simple JSON array:
+
+```json
+[
+  "user1@example.com",
+  "user2@example.com",
+  "user3@example.com"
+]
+```
 
 ## Customization
 
-### Colors & Branding
-
-Edit the CSS variables in `styles.css`:
-
-```css
-:root {
-    --primary-color: #6366f1;      /* Change to your brand color */
-    --secondary-color: #8b5cf6;    /* Secondary accent */
-    --accent-color: #ec4899;       /* Highlight color */
+### Colors
+Edit `tailwind.config.js` to change the color scheme:
+```js
+colors: {
+  primary: '#6366f1',    // Indigo
+  secondary: '#8b5cf6',  // Purple
 }
 ```
 
-### Content Updates
+### Content
+- Update hero copy in `components/Hero.jsx`
+- Modify pricing tiers in `components/Pricing.jsx`
+- Edit FAQs in `components/FAQ.jsx`
+- Update testimonials in `components/Testimonials.jsx`
 
-- Edit headlines, copy, and descriptions directly in `index.html`
-- Update pricing in the pricing section
-- Modify features list in the features grid
+### Branding
+- Change logo in `components/Header.jsx`
+- Update company name throughout
+- Modify social links in `components/Footer.jsx`
 
-### Email Confirmation
+## Deployment
 
-When a user signs up, they'll see a success message. Consider:
-- Sending a welcome email via your backend
-- Redirecting to a thank-you page
-- Collecting additional info (name, company, etc.)
+### Vercel (Recommended)
+
+```bash
+npm install -g vercel
+vercel
+```
+
+### Other Platforms
+
+The app is a standard Next.js project, so it can be deployed to:
+- Netlify
+- AWS Amplify
+- Heroku
+- DigitalOcean
+- Self-hosted servers
+
+## Environment Variables
+
+No external API keys required for basic functionality. Optional variables for production:
+
+```
+NEXT_PUBLIC_SITE_URL=https://yourdomain.com
+```
+
+## Performance
+
+- ⚡ Fast static generation
+- 📦 Optimized bundle size
+- 🎯 SEO-friendly with Next.js Head
+- 📱 Mobile-first responsive design
+- 🌙 Minimal JavaScript for dark mode
 
 ## Browser Support
 
 - Chrome/Edge 90+
 - Firefox 88+
 - Safari 14+
-- Mobile browsers (iOS Safari, Chrome Mobile)
-
-## Performance
-
-- **Lighthouse Score**: ~95+ (Desktop)
-- **Page Load**: <1.5s (typical connection)
-- **Zero external dependencies** - Pure HTML, CSS, JavaScript
-- **Mobile-optimized** - Responsive grid, touch-friendly inputs
-
-## Deployment
-
-### Static Hosting (Recommended)
-
-Deploy to any static hosting service:
-
-- **Vercel**: `vercel deploy`
-- **Netlify**: Drag & drop or `netlify deploy`
-- **GitHub Pages**: Push to repo, enable Pages in settings
-- **AWS S3**: Upload files to S3 bucket
-
-### Docker
-
-```dockerfile
-FROM nginx:alpine
-COPY . /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
-```
-
-## Testing
-
-### Manual Testing Checklist
-
-- [ ] Form validates email correctly
-- [ ] Success message appears on valid submission
-- [ ] Error messages display on invalid input
-- [ ] All links scroll smoothly
-- [ ] Mobile layout is responsive
-- [ ] Form button disabled state works
-- [ ] CTA buttons are clickable
-
-### Console Debugging
-
-In your browser console:
-
-```javascript
-// View waitlist (localStorage demo)
-window.waitlistDebug.getWaitlist()
-
-// Clear waitlist (for testing)
-window.waitlistDebug.clearWaitlist()
-
-// Manually track conversion
-window.waitlistDebug.trackConversion('test@example.com')
-```
-
-## Future Enhancements
-
-- [ ] Backend API integration for email storage
-- [ ] Email confirmation/verification flow
-- [ ] Analytics dashboard
-- [ ] Dark mode toggle
-- [ ] Multi-language support
-- [ ] Blog section
-- [ ] Customer testimonials carousel
-- [ ] FAQ section
-- [ ] Live chat widget
+- Mobile browsers (iOS Safari 14+, Chrome Android)
 
 ## License
 
-© 2026 AI Agent Platform. All rights reserved.
+MIT License - feel free to use this project as a starting point.
 
 ## Support
 
-For issues or questions, contact: support@aiagentplatform.com
+For issues or questions, refer to the FAQ section on the landing page or contact the development team.
+
+---
+
+Made with ❤️ for the AI Agent Platform

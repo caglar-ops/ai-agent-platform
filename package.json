@@ -1,18 +1,25 @@
 {
   "name": "ai-agent-platform",
-  "version": "1.0.0",
-  "description": "AI Agent Platform - Convert Smarter, Faster",
-  "main": "server.js",
+  "version": "0.1.0",
+  "description": "Modern AI Agent Platform landing page with early access signup",
+  "private": true,
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
-  "keywords": [
-    "ai",
-    "agents",
-    "automation",
-    "platform"
-  ],
-  "author": "AI Agent Platform Team",
-  "license": "MIT"
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "next": "^14.0.0",
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.0",
+    "postcss": "^8.4.31",
+    "autoprefixer": "^10.4.16",
+    "eslint": "^8.51.0",
+    "eslint-config-next": "^14.0.0"
+  }
 }
