@@ -1,97 +1,115 @@
-// Form submission handler
-document.getElementById('early-access-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Get form data
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const company = document.getElementById('company').value;
-    const useCase = document.getElementById('use-case').value;
-    
-    // Validate email
-    if (!isValidEmail(email)) {
-        alert('Please enter a valid email address');
-        return;
-    }
-    
-    // In a real application, this would send data to a server
-    console.log('Form submission:', {
-        name,
-        email,
-        company,
-        useCase,
-        timestamp: new Date().toISOString()
-    });
-    
-    // Show success message
-    const form = document.getElementById('early-access-form');
-    const successMessage = document.getElementById('success-message');
-    
-    form.style.display = 'none';
-    successMessage.style.display = 'block';
-    
-    // Optional: Reset form after 3 seconds
-    setTimeout(() => {
+// AI Agent Platform Landing Page - Form Handler
+// High-converting early access form functionality
+
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('earlyAccessForm');
+    const successMessage = document.getElementById('successMessage');
+
+    // Handle form submission
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Collect form data
+        const formData = {
+            fullName: document.getElementById('fullName').value,
+            email: document.getElementById('email').value,
+            company: document.getElementById('company').value,
+            useCase: document.getElementById('useCase').value,
+            timestamp: new Date().toISOString()
+        };
+
+        // Validate email format
+        if (!isValidEmail(formData.email)) {
+            alert('Please enter a valid email address.');
+            return;
+        }
+
+        // In production, this would send to a backend service
+        // For now, we'll simulate the submission
+        console.log('Early Access Submission:', formData);
+
+        // Show success message
+        form.style.display = 'none';
+        successMessage.style.display = 'block';
+
+        // Reset form for potential additional submissions
         form.reset();
-        form.style.display = 'flex';
-        successMessage.style.display = 'none';
-    }, 3000);
-});
 
-// Email validation
-function isValidEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-}
+        // Optional: Send to analytics or email service
+        trackSubmission(formData);
 
-// Smooth scroll for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        if (href !== '#' && document.querySelector(href)) {
+        // Scroll to success message
+        setTimeout(() => {
+            successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 300);
+    });
+
+    // Helper function to validate email
+    function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+    // Helper function to track submission (integrate with your analytics)
+    function trackSubmission(data) {
+        // This would typically send to your backend or analytics service
+        // Example: fetch('/api/early-access', { method: 'POST', body: JSON.stringify(data) })
+        
+        // For demonstration, store in localStorage
+        try {
+            const submissions = JSON.parse(localStorage.getItem('earlyAccessSubmissions') || '[]');
+            submissions.push(data);
+            localStorage.setItem('earlyAccessSubmissions', JSON.stringify(submissions));
+        } catch (error) {
+            console.error('Error tracking submission:', error);
+        }
+    }
+
+    // Smooth scroll behavior for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href === '#' || href === '') return;
+
             e.preventDefault();
             const target = document.querySelector(href);
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
     });
-});
 
-// Add animation on scroll
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
-};
-
-const observer = new IntersectionObserver(function(entries) {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
+    // Add hover effects to feature cards
+    const featureCards = document.querySelectorAll('.feature-card');
+    featureCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.cursor = 'pointer';
+        });
     });
-}, observerOptions);
 
-// Observe feature cards and pricing cards
-document.querySelectorAll('.feature-card, .pricing-card, .faq-item').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
-    observer.observe(el);
-});
+    // Add animation on scroll
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
 
-// Mobile menu toggle (if nav becomes collapsible in future)
-const navLinks = document.querySelector('.nav-links');
-if (window.innerWidth <= 768) {
-    navLinks.style.display = 'none';
-}
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
 
-// Log page analytics (replace with actual analytics service)
-console.log('AI Agent Platform landing page loaded');
-console.log('Tracking:', {
-    page: 'index',
-    title: 'Deploy Autonomous AI Agents in Minutes',
-    timestamp: new Date().toISOString()
+    // Apply animation to elements
+    document.querySelectorAll('.feature-card, .pricing-card').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+
+    // Mobile menu toggle (if needed in future)
+    console.log('AI Agent Platform landing page loaded successfully');
 });
